@@ -33,17 +33,13 @@ app.use("/api/song", songRoutes);
 
 const __dirname = path.resolve();
 
-if (process.env.NODE_ENV == "production") {
+
   app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
   });
-} else {
-  app.get("/", (req, res) => {
-    res.send("API Running Sucessfully");
-  });
-}
+
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
